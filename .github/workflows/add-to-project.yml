@@ -1,0 +1,13 @@
+name: Add to Casomo Workboard
+
+on:
+  workflow_call:
+
+jobs:
+  add-to-project:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@v1
+        with:
+          project-url: https://github.com/orgs/casomoltd/projects/3
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
