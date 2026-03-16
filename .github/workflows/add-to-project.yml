@@ -3,6 +3,11 @@ name: Add to Casomo Workboard
 on:
   workflow_call:
 
+env:
+  PROJECT_ID: PVT_kwDODSXxxs4BR49j
+  STATUS_FIELD_ID: PVTSSF_lADODSXxxs4BR49jzg_lWig
+  BACKLOG_OPTION_ID: f75ad846
+
 jobs:
   add-to-project:
     runs-on: ubuntu-latest
@@ -15,6 +20,23 @@ jobs:
           owner: casomoltd
 
       - uses: actions/add-to-project@v1
+        id: add
         with:
           project-url: https://github.com/orgs/casomoltd/projects/3
           github-token: ${{ steps.app-token.outputs.token }}
+
+      - name: Set status to Backlog
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          gh api graphql -f query='
+            mutation {
+              updateProjectV2ItemFieldValue(input: {
+                projectId: "${{ env.PROJECT_ID }}"
+                itemId: "${{ steps.add.outputs.itemId }}"
+                fieldId: "${{ env.STATUS_FIELD_ID }}"
+                value: { singleSelectOptionId: "${{ env.BACKLOG_OPTION_ID }}" }
+              }) {
+                projectV2Item { id }
+              }
+            }'
