@@ -65,10 +65,22 @@ jobs:
    secrets to the reusable workflow automatically.
 2. Verify this repo's Actions access level is set to `organization`
    (see [Setup](#setup) above).
+3. **Private repos only:** Set the repo-level secrets (see below). Org secrets
+   are only available to public repos on the GitHub Free plan.
 
-## Org secrets
+   ```bash
+   echo "<APP_ID>" | gh secret set WORKBOARD_APP_ID --repo casomoltd/<repo>
+   gh secret set WORKBOARD_APP_PRIVATE_KEY --repo casomoltd/<repo> < path/to/private-key.pem
+   ```
+
+## Secrets
 
 | Secret | Purpose |
 |---|---|
 | `WORKBOARD_APP_ID` | Casomo Bot GitHub App ID |
 | `WORKBOARD_APP_PRIVATE_KEY` | Casomo Bot private key for minting tokens |
+
+Org-level secrets are scoped to **public repositories only** (GitHub Free plan
+limitation). For **private repos**, these must be set as repo-level secrets.
+The App ID and private key can be found/generated at the
+[Casomo Bot app settings](https://github.com/organizations/casomoltd/settings/apps).
