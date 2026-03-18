@@ -19,7 +19,7 @@ jobs:
           private-key: ${{ secrets.WORKBOARD_APP_PRIVATE_KEY }}
           owner: casomoltd
 
-      - uses: actions/add-to-project@v1
+      - uses: actions/add-to-project@v1.0.2
         id: add
         with:
           project-url: https://github.com/orgs/casomoltd/projects/3
