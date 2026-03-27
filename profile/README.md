@@ -1,11 +1,8 @@
 # Casomo
 
-Casomo is a registered UK limited company. We build focused
-software tools and offer engineering consulting.
-Founded and directed by
-[David Mohamad](https://github.com/dkmohamad).
+Casomo is a [registered UK limited company](https://find-and-update.company-information.service.gov.uk/company/15030496) founded and directed by [David Mohamad](https://github.com/dkmohamad). It builds focused software tools and offers engineering consulting.
 
-- **Tools** — [casomo.co.uk](https://casomo.co.uk)
+- **Portfolio** — [casomo.co.uk](https://casomo.co.uk)
 - **Consulting** — [casomoltd.com](https://casomoltd.com)
 
 ## Public repos
