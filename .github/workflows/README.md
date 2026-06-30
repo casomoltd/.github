@@ -4,10 +4,24 @@
 
 **File:** `.github/workflows/add-to-project.yml`
 
-Reusable workflow that automatically adds issues to the
-[Casomo Workboard](https://github.com/orgs/casomoltd/projects/3) project.
+Reusable workflow that automatically adds items to the
+[Casomo Workboard](https://github.com/orgs/casomoltd/projects/3) project and
+sets their status to **Backlog**. `actions/add-to-project` auto-detects whether
+the triggering item is an issue or a pull request, so the same reusable workflow
+serves both.
 
-**Triggers:** Called by per-repo caller workflows on `issues: [opened, transferred, reopened]`.
+**Triggers:** Called by per-repo caller workflows on:
+- `issues: [opened, transferred, reopened]` — every new issue.
+- `pull_request_target: [opened, reopened]` — **Dependabot PRs only** (the
+  caller gates on `github.actor == 'dependabot[bot]'`). This is how Dependabot's
+  security-update and grouped `github-actions` bump PRs land on the board. Human
+  PRs are intentionally left off — they already track via their linked issue.
+
+**Why `pull_request_target` (not `pull_request`):** a workflow triggered by a
+Dependabot `pull_request` event runs with a read-only token and **no access to
+Actions secrets**, so `create-github-app-token` could not mint the Workboard App
+token. `pull_request_target` runs in the base-branch context with full secret
+access. It's safe here because the workflow never checks out the PR's code.
 
 **Auth:** Uses the **Casomo Bot** GitHub App (App ID stored in `WORKBOARD_APP_ID` org secret)
 to mint short-lived tokens at runtime. No PATs required.
@@ -22,9 +36,15 @@ name: Add to Casomo Workboard
 on:
   issues:
     types: [opened, transferred, reopened]
+  pull_request_target:
+    types: [opened, reopened]
 
 jobs:
   add:
+    # Issues: always. PRs: only Dependabot's — human PRs track via their
+    # linked issue. pull_request_target so the reusable workflow can read
+    # the App secrets that Dependabot pull_request runs are denied.
+    if: github.event_name == 'issues' || github.actor == 'dependabot[bot]'
     uses: casomoltd/.github/.github/workflows/add-to-project.yml@main
     secrets: inherit
 ```
