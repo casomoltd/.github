@@ -12,6 +12,4 @@ Casomo is a [registered UK limited company](https://find-and-update.company-info
 
 ## Get in touch
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/davidmohamad/)
-[![Email](https://img.shields.io/badge/Email-EA4335?style=flat&logo=gmail&logoColor=white)](mailto:info@casomoltd.com)
-[![Web](https://img.shields.io/badge/casomoltd.com-111827?style=flat&logo=safari&logoColor=white)](https://casomoltd.com/contact)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/davidmohamad/) [![Email](https://img.shields.io/badge/Email-EA4335?style=flat&logo=gmail&logoColor=white)](mailto:info@casomoltd.com) [![Web](https://img.shields.io/badge/casomoltd.com-111827?style=flat&logo=safari&logoColor=white)](https://casomoltd.com/contact)
